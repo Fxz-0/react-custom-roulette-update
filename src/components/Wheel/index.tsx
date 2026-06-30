@@ -125,12 +125,13 @@ export const Wheel = ({
   const [isFontLoaded, setIsFontLoaded] = useState(false);
   const mustStopSpinning = useRef<boolean>(false);
 
+  const classKeyRef = useRef<string>(makeClassKey(5));
   // New states for tick func
   //const [currentSegment, setCurrentSegment] = useState<number>(-1);
   const [lastTickSegment, setLastTickSegment] = useState<number>(-1);
   const tickIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  const classKey = makeClassKey(5);
+  const classKey = classKeyRef.current;
 
   const normalizedSpinDuration = Math.max(0.01, spinDuration);
 
@@ -299,7 +300,7 @@ export const Wheel = ({
   useEffect(() => {
     if (hasStoppedSpinning) {
       setIsCurrentlySpinning(false);
-      setStartRotationDegrees(finalRotationDegrees);
+      setStartRotationDegrees(finalRotationDegrees % 360); // ← % 360
     }
   }, [hasStoppedSpinning, finalRotationDegrees]);
 

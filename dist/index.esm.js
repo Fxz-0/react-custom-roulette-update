@@ -1,5 +1,5 @@
-import mt, { useRef as Ae, useMemo as gt, useCallback as Ze, useEffect as ie, useState as w } from "react";
-import ht from "webfontloader";
+import gt, { useRef as fe, useMemo as ht, useCallback as Ze, useEffect as ie, useState as w } from "react";
+import dt from "webfontloader";
 import H from "styled-components";
 var ue = { exports: {} }, ae = {};
 /**
@@ -12,22 +12,22 @@ var ue = { exports: {} }, ae = {};
  * LICENSE file in the root directory of this source tree.
  */
 var Ue;
-function dt() {
+function Rt() {
   if (Ue) return ae;
   Ue = 1;
   var t = Symbol.for("react.transitional.element"), r = Symbol.for("react.fragment");
-  function n(h, l, u) {
+  function n(h, c, u) {
     var p = null;
-    if (u !== void 0 && (p = "" + u), l.key !== void 0 && (p = "" + l.key), "key" in l) {
+    if (u !== void 0 && (p = "" + u), c.key !== void 0 && (p = "" + c.key), "key" in c) {
       u = {};
-      for (var k in l)
-        k !== "key" && (u[k] = l[k]);
-    } else u = l;
-    return l = u.ref, {
+      for (var k in c)
+        k !== "key" && (u[k] = c[k]);
+    } else u = c;
+    return c = u.ref, {
       $$typeof: t,
       type: h,
       key: p,
-      ref: l !== void 0 ? l : null,
+      ref: c !== void 0 ? c : null,
       props: u
     };
   }
@@ -44,7 +44,7 @@ var se = {};
  * LICENSE file in the root directory of this source tree.
  */
 var $e;
-function Rt() {
+function Tt() {
   return $e || ($e = 1, process.env.NODE_ENV !== "production" && (function() {
     function t(e) {
       if (e == null) return null;
@@ -101,8 +101,8 @@ function Rt() {
       }
       if (o) {
         o = console;
-        var c = o.error, f = typeof Symbol == "function" && Symbol.toStringTag && e[Symbol.toStringTag] || e.constructor.name || "Object";
-        return c.call(
+        var l = o.error, f = typeof Symbol == "function" && Symbol.toStringTag && e[Symbol.toStringTag] || e.constructor.name || "Object";
+        return l.call(
           o,
           "The provided key is an unsupported type %s. This value must be coerced to a string before using it here.",
           f
@@ -120,7 +120,7 @@ function Rt() {
         return "<...>";
       }
     }
-    function l() {
+    function c() {
       var e = $.A;
       return e === null ? null : e.getOwner();
     }
@@ -135,34 +135,34 @@ function Rt() {
       return e.key !== void 0;
     }
     function k(e, o) {
-      function c() {
+      function l() {
         R || (R = !0, console.error(
           "%s: `key` is not a prop. Trying to access it will result in `undefined` being returned. If you need to access the same value within the child component, you should pass it as a different prop. (https://react.dev/link/special-props)",
           o
         ));
       }
-      c.isReactWarning = !0, Object.defineProperty(e, "key", {
-        get: c,
+      l.isReactWarning = !0, Object.defineProperty(e, "key", {
+        get: l,
         configurable: !0
       });
     }
-    function G() {
+    function K() {
       var e = t(this.type);
       return v[e] || (v[e] = !0, console.error(
         "Accessing element.ref was removed in React 19. ref is now a regular prop. It will be removed from the JSX Element type in a future release."
       )), e = this.props.ref, e !== void 0 ? e : null;
     }
-    function M(e, o, c, f, O, d) {
-      var g = c.ref;
+    function M(e, o, l, f, O, d) {
+      var g = l.ref;
       return e = {
         $$typeof: F,
         type: e,
         key: o,
-        props: c,
+        props: l,
         _owner: f
       }, (g !== void 0 ? g : null) !== null ? Object.defineProperty(e, "ref", {
         enumerable: !1,
-        get: G
+        get: K
       }) : Object.defineProperty(e, "ref", { enumerable: !1, value: null }), e._store = {}, Object.defineProperty(e._store, "validated", {
         configurable: !1,
         enumerable: !1,
@@ -185,7 +185,7 @@ function Rt() {
         value: d
       }), Object.freeze && (Object.freeze(e.props), Object.freeze(e)), e;
     }
-    function K(e, o, c, f, O, d) {
+    function G(e, o, l, f, O, d) {
       var g = o.children;
       if (g !== void 0)
         if (f)
@@ -200,8 +200,8 @@ function Rt() {
         else J(g);
       if (q.call(o, "key")) {
         g = t(e);
-        var z = Object.keys(o).filter(function(me) {
-          return me !== "key";
+        var z = Object.keys(o).filter(function(ge) {
+          return ge !== "key";
         });
         f = 0 < z.length ? "{key: someKey, " + z.join(": ..., ") + ": ...}" : "{key: someKey}", m[g + f] || (z = 0 < z.length ? "{" + z.join(": ..., ") + ": ...}" : "{}", console.error(
           `A props object containing a "key" prop is being spread into JSX:
@@ -216,19 +216,19 @@ React keys must be passed directly to JSX without using spread:
           g
         ), m[g + f] = !0);
       }
-      if (g = null, c !== void 0 && (n(c), g = "" + c), p(o) && (n(o.key), g = "" + o.key), "key" in o) {
-        c = {};
+      if (g = null, l !== void 0 && (n(l), g = "" + l), p(o) && (n(o.key), g = "" + o.key), "key" in o) {
+        l = {};
         for (var re in o)
-          re !== "key" && (c[re] = o[re]);
-      } else c = o;
+          re !== "key" && (l[re] = o[re]);
+      } else l = o;
       return g && k(
-        c,
+        l,
         typeof e == "function" ? e.displayName || e.name || "Unknown" : e
       ), M(
         e,
         g,
-        c,
-        l(),
+        l,
+        c(),
         O,
         d
       );
@@ -239,7 +239,7 @@ React keys must be passed directly to JSX without using spread:
     function X(e) {
       return typeof e == "object" && e !== null && e.$$typeof === F;
     }
-    var E = mt, F = Symbol.for("react.transitional.element"), W = Symbol.for("react.portal"), L = Symbol.for("react.fragment"), V = Symbol.for("react.strict_mode"), Z = Symbol.for("react.profiler"), Y = Symbol.for("react.consumer"), B = Symbol.for("react.context"), s = Symbol.for("react.forward_ref"), a = Symbol.for("react.suspense"), C = Symbol.for("react.suspense_list"), U = Symbol.for("react.memo"), D = Symbol.for("react.lazy"), y = Symbol.for("react.activity"), I = Symbol.for("react.client.reference"), $ = E.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, q = Object.prototype.hasOwnProperty, ne = Array.isArray, x = console.createTask ? console.createTask : function() {
+    var E = gt, F = Symbol.for("react.transitional.element"), W = Symbol.for("react.portal"), L = Symbol.for("react.fragment"), V = Symbol.for("react.strict_mode"), Z = Symbol.for("react.profiler"), Y = Symbol.for("react.consumer"), B = Symbol.for("react.context"), s = Symbol.for("react.forward_ref"), a = Symbol.for("react.suspense"), C = Symbol.for("react.suspense_list"), U = Symbol.for("react.memo"), D = Symbol.for("react.lazy"), y = Symbol.for("react.activity"), I = Symbol.for("react.client.reference"), $ = E.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, q = Object.prototype.hasOwnProperty, ne = Array.isArray, x = console.createTask ? console.createTask : function() {
       return null;
     };
     E = {
@@ -251,22 +251,22 @@ React keys must be passed directly to JSX without using spread:
       E,
       u
     )(), P = x(h(u)), m = {};
-    se.Fragment = L, se.jsx = function(e, o, c) {
+    se.Fragment = L, se.jsx = function(e, o, l) {
       var f = 1e4 > $.recentlyCreatedOwnerStacks++;
-      return K(
+      return G(
         e,
         o,
-        c,
+        l,
         !1,
         f ? Error("react-stack-top-frame") : j,
         f ? x(h(e)) : P
       );
-    }, se.jsxs = function(e, o, c) {
+    }, se.jsxs = function(e, o, l) {
       var f = 1e4 > $.recentlyCreatedOwnerStacks++;
-      return K(
+      return G(
         e,
         o,
-        c,
+        l,
         !0,
         f ? Error("react-stack-top-frame") : j,
         f ? x(h(e)) : P
@@ -275,11 +275,11 @@ React keys must be passed directly to JSX without using spread:
   })()), se;
 }
 var Pe;
-function Tt() {
-  return Pe || (Pe = 1, process.env.NODE_ENV === "production" ? ue.exports = dt() : ue.exports = Rt()), ue.exports;
+function Et() {
+  return Pe || (Pe = 1, process.env.NODE_ENV === "production" ? ue.exports = Rt() : ue.exports = Tt()), ue.exports;
 }
-var te = Tt();
-const ze = ["darkgrey", "lightgrey"], He = ["black"], Et = "black", At = "black", bt = "black", St = 5, yt = 0, wt = 0, pt = 5, vt = 60, Ot = "Nunito", Ge = 20, Ke = "bold", Je = "normal", Nt = 1, Kt = 4, _t = !1, et = [
+var te = Et();
+const ze = ["darkgrey", "lightgrey"], He = ["black"], At = "black", bt = "black", St = "black", yt = 5, wt = 0, pt = 0, vt = 5, Ot = 60, Nt = "Nunito", Ke = 20, Ge = "bold", Je = "normal", _t = 1, Jt = 4, kt = !1, et = [
   "arial",
   "verdana",
   "tahoma",
@@ -303,24 +303,24 @@ const ze = ["darkgrey", "lightgrey"], He = ["black"], Et = "black", At = "black"
     return console.error(
       `prizeNumber (${t}) must be between 0 and ${r - 1}`
     ), 0;
-  const l = 360 / r, u = 43 + l / 2, p = n ? (-1 + Math.random() * 2) * l * 0.35 : 0, M = l * (r - t) - u + p + 360 * h;
+  const c = 360 / r, u = 43 + c / 2, p = n ? (-1 + Math.random() * 2) * c * 0.35 : 0, M = c * (r - t) - u + p + 360 * h;
   return r - t > r / 2 ? -360 + M : M;
 }, Ye = (t, r, n) => (t > r && (console.warn(`clamp: min (${t}) is greater than max (${r}), swapping`), [t, r] = [r, t]), Math.min(Math.max(t, +n), r)), Be = (t) => (t % 360 + 360) % 360, qe = (t) => {
   if (!t || typeof t != "string") return !1;
   const r = t.trim().toLowerCase();
   return r !== "" && !et.includes(r);
-}, fe = (t) => {
+}, me = (t) => {
   if (!t || t.length === 0)
     return console.warn("getQuantity: prizeMap is empty"), 0;
   const r = t[t.length - 1];
   return !r || r.length === 0 ? (console.warn("getQuantity: last array in prizeMap is empty"), 0) : r[r.length - 1] + 1;
-}, Qe = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789", kt = (t) => {
+}, Qe = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789", Lt = (t) => {
   let r = "";
   const n = Qe.length;
   for (let h = 0; h < t; h++)
     r += Qe.charAt(Math.floor(Math.random() * n));
   return r;
-}, Jt = (t) => {
+}, Xt = (t) => {
   if (!Array.isArray(t) || t.length === 0)
     return console.error("Wheel data must be a non-empty array"), !1;
   for (let r = 0; r < t.length; r++) {
@@ -331,13 +331,13 @@ const ze = ["darkgrey", "lightgrey"], He = ["black"], Et = "black", At = "black"
       return console.error(`Item ${r} has invalid optionSize: ${n.optionSize}`), !1;
   }
   return !0;
-}, Xt = (t, r) => {
+}, Yt = (t, r) => {
   if (r <= 0) return -1;
-  const n = Be(t), h = 360 / r, l = Be(360 - n + 90);
-  return Math.floor(l / h) % r;
-}, Lt = "data:image/png;base64,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", tt = new Image();
-tt.src = Lt;
-const Dt = H.img`
+  const n = Be(t), h = 360 / r, c = Be(360 - n + 90);
+  return Math.floor(c / h) % r;
+}, Dt = "data:image/png;base64,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", tt = new Image();
+tt.src = Dt;
+const It = H.img`
   -webkit-user-drag: none;
   -khtml-user-drag: none;
   -moz-user-drag: none;
@@ -363,7 +363,7 @@ H.div`
   transition: all 0.3s ease-in-out;
   will-change: transform, opacity;
 `;
-const It = H.div`
+const xt = H.div`
   position: relative;
   width: 80vw;
   max-width: 445px;
@@ -373,7 +373,7 @@ const It = H.div`
   flex-shrink: 0;
   z-index: 5;
   pointer-events: none;
-`, xt = H.div`
+`, Mt = H.div`
   position: absolute;
   width: 100%;
   left: 0px;
@@ -436,7 +436,7 @@ const It = H.div`
       transform: rotate(${(t) => 360 * (t.$spinRevolutions || 4) + t.$finalRotationDegrees}deg);
     }
   }
-`, Mt = H(Dt)`
+`, Ft = H(It)`
   position: absolute;
   z-index: 5;
   width: ${(t) => t.size || 17}%;
@@ -474,7 +474,7 @@ const It = H.div`
         `;
   }
 }}
-`, Ft = H.div`
+`, Wt = H.div`
   position: absolute;
   z-index: 5;
   width: ${(t) => t.size || 17}%;
@@ -512,7 +512,7 @@ const It = H.div`
         `;
   }
 }}
-`, Wt = H.canvas`
+`, jt = H.canvas`
   width: 100%;
   height: 100%;
   image-rendering: -webkit-optimize-contrast;
@@ -524,26 +524,26 @@ const It = H.div`
   will-change: transform;
   transform: translateZ(0);
   backface-visibility: hidden;
-`, Ve = (t, r, n, h, l, u) => {
+`, Ve = (t, r, n, h, c, u) => {
   t.beginPath(), t.moveTo(
     r + (h + 1) * Math.cos(u),
     n + (h + 1) * Math.sin(u)
   ), t.lineTo(
-    r + (l - 1) * Math.cos(u),
-    n + (l - 1) * Math.sin(u)
+    r + (c - 1) * Math.cos(u),
+    n + (c - 1) * Math.sin(u)
   ), t.closePath(), t.stroke();
-}, jt = ({
+}, Ct = ({
   width: t,
   height: r,
   data: n,
   outerBorderColor: h,
-  outerBorderWidth: l,
+  outerBorderWidth: c,
   innerRadius: u,
   innerBorderColor: p,
   innerBorderWidth: k,
-  radiusLineColor: G,
+  radiusLineColor: K,
   radiusLineWidth: M,
-  fontFamily: K,
+  fontFamily: G,
   fontWeight: J,
   fontSize: X,
   fontStyle: E,
@@ -552,7 +552,7 @@ const It = H.div`
   rouletteUpdater: L,
   textDistance: V
 }) => {
-  const Z = Ae(null), Y = gt(() => fe(W), [W]), B = Ze(() => {
+  const Z = fe(null), Y = ht(() => me(W), [W]), B = Ze(() => {
     const s = Z.current;
     if (!s) {
       console.warn("Canvas ref is not available");
@@ -564,7 +564,7 @@ const It = H.div`
       return;
     }
     a.clearRect(0, 0, s.width, s.height), a.strokeStyle = "transparent", a.lineWidth = 0;
-    const C = l * 2, U = k * 2, D = M * 2;
+    const C = c * 2, U = k * 2, D = M * 2;
     let y = 0;
     const I = s.width / 2 - 10, $ = Ye(0, 100, V), q = I * $ / 100, ne = Ye(0, 100, u), x = I * ne / 100, R = s.width / 2, v = s.height / 2;
     if (!n || n.length === 0) {
@@ -572,8 +572,8 @@ const It = H.div`
       return;
     }
     for (let j = 0; j < n.length; j++) {
-      const { optionSize: P, style: m, option: e, image: o } = n[j], c = P && P * (2 * Math.PI) / Y || 2 * Math.PI / Y, f = y + c;
-      a.fillStyle = (m == null ? void 0 : m.backgroundColor) || "#cccccc", a.beginPath(), a.arc(R, v, I, y, f, !1), a.arc(R, v, x, f, y, !0), a.stroke(), a.fill(), a.save(), a.strokeStyle = D <= 0 ? "transparent" : G, a.lineWidth = D, Ve(
+      const { optionSize: P, style: m, option: e, image: o } = n[j], l = P && P * (2 * Math.PI) / Y || 2 * Math.PI / Y, f = y + l;
+      a.fillStyle = (m == null ? void 0 : m.backgroundColor) || "#cccccc", a.beginPath(), a.arc(R, v, I, y, f, !1), a.arc(R, v, x, f, y, !0), a.stroke(), a.fill(), a.save(), a.strokeStyle = D <= 0 ? "transparent" : K, a.lineWidth = D, Ve(
         a,
         R,
         v,
@@ -600,10 +600,10 @@ const It = H.div`
         0,
         2 * Math.PI
       ), a.closePath(), a.stroke(), a.translate(
-        R + Math.cos(y + c / 2) * q,
-        v + Math.sin(y + c / 2) * q
+        R + Math.cos(y + l / 2) * q,
+        v + Math.sin(y + l / 2) * q
       );
-      let O = y + c / 2;
+      let O = y + l / 2;
       if (o && o._imageHTML) {
         O += o.landscape ? 0 : Math.PI / 2, a.rotate(O);
         const d = o._imageHTML;
@@ -617,7 +617,7 @@ const It = H.div`
       } else if (e) {
         O += F ? Math.PI / 2 : 0, a.rotate(O);
         const d = e;
-        a.font = `${(m == null ? void 0 : m.fontStyle) || E} ${(m == null ? void 0 : m.fontWeight) || J} ${((m == null ? void 0 : m.fontSize) || X) * 2}px ${(m == null ? void 0 : m.fontFamily) || K}, Helvetica, Arial`, a.fillStyle = (m == null ? void 0 : m.textColor) || "#000000", a.textBaseline = "middle", a.fillText(
+        a.font = `${(m == null ? void 0 : m.fontStyle) || E} ${(m == null ? void 0 : m.fontWeight) || J} ${((m == null ? void 0 : m.fontSize) || X) * 2}px ${(m == null ? void 0 : m.fontFamily) || G}, Helvetica, Arial`, a.fillStyle = (m == null ? void 0 : m.textColor) || "#000000", a.textBaseline = "middle", a.fillText(
           d,
           -a.measureText(d).width / 2,
           0
@@ -628,13 +628,13 @@ const It = H.div`
   }, [
     n,
     h,
-    l,
+    c,
     u,
     p,
     k,
-    G,
-    M,
     K,
+    M,
+    G,
     J,
     X,
     E,
@@ -649,7 +649,7 @@ const It = H.div`
     }, 0);
     return () => clearTimeout(s);
   }, [B, L]), /* @__PURE__ */ te.jsx(
-    Wt,
+    jt,
     {
       ref: Z,
       width: t,
@@ -657,30 +657,30 @@ const It = H.div`
     },
     `canvas-${L}`
   );
-}, Ct = "started-spinning", Ut = 2600, $t = 750, Pt = 8e3, Yt = ({
+}, Ut = "started-spinning", $t = 2600, Pt = 750, zt = 8e3, Bt = ({
   mustStartSpinning: t,
   prizeNumber: r,
   data: n,
   onStopSpinning: h = () => null,
-  backgroundColors: l = ze,
+  backgroundColors: c = ze,
   textColors: u = He,
-  outerBorderColor: p = Et,
-  outerBorderWidth: k = St,
-  innerRadius: G = yt,
-  innerBorderColor: M = At,
-  innerBorderWidth: K = wt,
-  radiusLineColor: J = bt,
-  radiusLineWidth: X = pt,
+  outerBorderColor: p = At,
+  outerBorderWidth: k = yt,
+  innerRadius: K = wt,
+  innerBorderColor: M = bt,
+  innerBorderWidth: G = pt,
+  radiusLineColor: J = St,
+  radiusLineWidth: X = vt,
   fontFamily: E = et[0],
-  fontSize: F = Ge,
-  fontWeight: W = Ke,
+  fontSize: F = Ke,
+  fontWeight: W = Ge,
   fontStyle: L = Je,
   perpendicularText: V = !1,
-  textDistance: Z = vt,
-  spinDuration: Y = Nt,
+  textDistance: Z = Ot,
+  spinDuration: Y = _t,
   startingOptionIndex: B = -1,
   pointerProps: s = {},
-  disableInitialAnimation: a = _t,
+  disableInitialAnimation: a = kt,
   // New props
   onSpinStart: C,
   onTick: U,
@@ -690,9 +690,9 @@ const It = H.div`
   spinRevolutions: $ = 4,
   easingFunction: q
 }) => {
-  const [ne, x] = w([...n]), [R, v] = w([[0]]), [j, P] = w(0), [m, e] = w(0), [o, c] = w(!1), [f, O] = w(!1), [d, g] = w(!1), [z, re] = w(!1), [me, ge] = w(!1), [nt, rt] = w(0), [be, ot] = w(0), [at, Se] = w(!1), he = Ae(!1), [ye, st] = w(-1), de = Ae(null), oe = kt(5), Re = Math.max(0.01, Y), we = Ut * Re, pe = $t * Re, ve = Pt * Re, it = we + pe + ve, Oe = Ze(
+  const [ne, x] = w([...n]), [R, v] = w([[0]]), [j, P] = w(0), [m, e] = w(0), [o, l] = w(!1), [f, O] = w(!1), [d, g] = w(!1), [z, re] = w(!1), [ge, he] = w(!1), [nt, rt] = w(0), [be, ot] = w(0), [at, Se] = w(!1), de = fe(!1), st = fe(Lt(5)), [ye, it] = w(-1), Re = fe(null), oe = st.current, Te = Math.max(0.01, Y), we = $t * Te, pe = Pt * Te, ve = zt * Te, ct = we + pe + ve, Oe = Ze(
     (N) => {
-      const T = (N % 360 + 360) % 360, A = fe(R);
+      const T = (N % 360 + 360) % 360, A = me(R);
       if (A === 0) return -1;
       const b = 360 / A, _ = (360 - T + 90) % 360;
       return Math.floor(_ / b) % A;
@@ -700,18 +700,18 @@ const It = H.div`
     [R]
   );
   ie(() => {
-    var ee, le, Q, Ne, _e, ke, Le, De, Ie, xe;
+    var ee, ce, Q, Ne, _e, ke, Le, De, Ie, xe;
     let N = 0;
     const T = [], A = (n == null ? void 0 : n.length) || 0, b = [{ option: "", optionSize: 1 }], _ = qe(E == null ? void 0 : E.trim()) ? [E] : [];
     for (let i = 0; i < A; i++) {
-      let Te = ((Q = (le = (ee = n[i]) == null ? void 0 : ee.style) == null ? void 0 : le.fontFamily) == null ? void 0 : Q.split(",")) || [];
-      Te = Te.map((S) => S.trim()).filter(qe), _.push(...Te), b[i] = {
+      let Ee = ((Q = (ce = (ee = n[i]) == null ? void 0 : ee.style) == null ? void 0 : ce.fontFamily) == null ? void 0 : Q.split(",")) || [];
+      Ee = Ee.map((S) => S.trim()).filter(qe), _.push(...Ee), b[i] = {
         ...n[i],
         style: {
-          backgroundColor: ((Ne = n[i].style) == null ? void 0 : Ne.backgroundColor) || (l == null ? void 0 : l[i % (l == null ? void 0 : l.length)]) || ze[0],
-          fontFamily: ((_e = n[i].style) == null ? void 0 : _e.fontFamily) || E || Ot,
-          fontSize: ((ke = n[i].style) == null ? void 0 : ke.fontSize) || F || Ge,
-          fontWeight: ((Le = n[i].style) == null ? void 0 : Le.fontWeight) || W || Ke,
+          backgroundColor: ((Ne = n[i].style) == null ? void 0 : Ne.backgroundColor) || (c == null ? void 0 : c[i % (c == null ? void 0 : c.length)]) || ze[0],
+          fontFamily: ((_e = n[i].style) == null ? void 0 : _e.fontFamily) || E || Nt,
+          fontSize: ((ke = n[i].style) == null ? void 0 : ke.fontSize) || F || Ke,
+          fontWeight: ((Le = n[i].style) == null ? void 0 : Le.fontWeight) || W || Ge,
           fontStyle: ((De = n[i].style) == null ? void 0 : De.fontStyle) || L || Je,
           textColor: ((Ie = n[i].style) == null ? void 0 : Ie.textColor) || (u == null ? void 0 : u[i % (u == null ? void 0 : u.length)]) || He[0]
         }
@@ -719,33 +719,33 @@ const It = H.div`
       for (let S = 0; S < (b[i].optionSize || 1); S++)
         T[i][S] = N++;
       if (n[i].image) {
-        ot((ce) => ce + 1);
+        ot((le) => le + 1);
         const S = new Image();
         S.src = ((xe = n[i].image) == null ? void 0 : xe.uri) || "", S.onload = () => {
-          var ce, Me, Fe, We, je, Ce;
-          S.height = 200 * (((ce = n[i].image) == null ? void 0 : ce.sizeMultiplier) || 1), S.width = S.naturalWidth / S.naturalHeight * S.height, b[i].image = {
+          var le, Me, Fe, We, je, Ce;
+          S.height = 200 * (((le = n[i].image) == null ? void 0 : le.sizeMultiplier) || 1), S.width = S.naturalWidth / S.naturalHeight * S.height, b[i].image = {
             uri: ((Me = n[i].image) == null ? void 0 : Me.uri) || "",
             offsetX: ((Fe = n[i].image) == null ? void 0 : Fe.offsetX) || 0,
             offsetY: ((We = n[i].image) == null ? void 0 : We.offsetY) || 0,
             landscape: ((je = n[i].image) == null ? void 0 : je.landscape) || !1,
             sizeMultiplier: ((Ce = n[i].image) == null ? void 0 : Ce.sizeMultiplier) || 1,
             _imageHTML: S
-          }, rt((Ee) => Ee + 1), ge((Ee) => !Ee);
+          }, rt((Ae) => Ae + 1), he((Ae) => !Ae);
         };
       }
     }
     if ((_ == null ? void 0 : _.length) > 0)
       try {
-        ht.load({
+        dt.load({
           google: {
             families: Array.from(new Set(_.filter((i) => !!i)))
           },
           timeout: 1e3,
           fontactive() {
-            ge((i) => !i);
+            he((i) => !i);
           },
           active() {
-            Se(!0), ge((i) => !i);
+            Se(!0), he((i) => !i);
           }
         });
       } catch (i) {
@@ -753,49 +753,49 @@ const It = H.div`
       }
     else
       Se(!0);
-    x([...b]), v(T), ct(B, T), re(!0);
-  }, [n, l, u, E, F, W, L, B]), ie(() => {
+    x([...b]), v(T), ut(B, T), re(!0);
+  }, [n, c, u, E, F, W, L, B]), ie(() => {
     if (d && U)
-      return de.current = setInterval(() => {
+      return Re.current = setInterval(() => {
         const N = document.querySelector(
           `.rotation-${oe}`
         );
         if (N) {
           const A = window.getComputedStyle(N).transform;
           if (A && A !== "none") {
-            const b = A.split("(")[1].split(")")[0].split(","), _ = parseFloat(b[0]), ee = parseFloat(b[1]), le = Math.atan2(ee, _) * (180 / Math.PI), Q = Oe(le);
-            Q !== ye && Q !== -1 && (st(Q), U(Q));
+            const b = A.split("(")[1].split(")")[0].split(","), _ = parseFloat(b[0]), ee = parseFloat(b[1]), ce = Math.atan2(ee, _) * (180 / Math.PI), Q = Oe(ce);
+            Q !== ye && Q !== -1 && (it(Q), U(Q));
           }
         }
       }, 50), () => {
-        de.current && clearInterval(de.current);
+        Re.current && clearInterval(Re.current);
       };
   }, [d, ye, Oe, U, oe]), ie(() => {
     var N, T;
     if (t && !d) {
       g(!0), lt();
-      const A = (T = R[r]) == null ? void 0 : T[Math.floor(Math.random() * ((N = R[r]) == null ? void 0 : N.length))], b = Xe(A, fe(R));
+      const A = (T = R[r]) == null ? void 0 : T[Math.floor(Math.random() * ((N = R[r]) == null ? void 0 : N.length))], b = Xe(A, me(R));
       e(b);
     }
   }, [t, d, R, r, $]), ie(() => {
-    f && (g(!1), P(m));
+    f && (g(!1), P(m % 360));
   }, [f, m]);
   const lt = () => {
-    c(!0), O(!1), he.current = !0, C == null || C(), setTimeout(() => {
-      he.current && (he.current = !1, c(!1), O(!0), D == null || D(r), h(), I && y && setTimeout(() => {
+    l(!0), O(!1), de.current = !0, C == null || C(), setTimeout(() => {
+      de.current && (de.current = !1, l(!1), O(!0), D == null || D(r), h(), I && y && setTimeout(() => {
         y(r);
       }, 500));
-    }, it);
-  }, ct = (N, T) => {
+    }, ct);
+  }, ut = (N, T) => {
     var A, b;
     if (N >= 0 && T.length > 0) {
       const _ = Math.floor(N) % T.length, ee = (b = T[_]) == null ? void 0 : b[Math.floor(((A = T[_]) == null ? void 0 : A.length) / 2)];
       P(
-        Xe(ee, fe(T), !1)
+        Xe(ee, me(T), !1)
       );
     }
-  }, ut = () => (s == null ? void 0 : s.type) === "custom" && (s != null && s.component) ? /* @__PURE__ */ te.jsx(
-    Ft,
+  }, ft = () => (s == null ? void 0 : s.type) === "custom" && (s != null && s.component) ? /* @__PURE__ */ te.jsx(
+    Wt,
     {
       position: s.position || "right",
       size: s.size || 17,
@@ -804,7 +804,7 @@ const It = H.div`
       children: s.component
     }
   ) : /* @__PURE__ */ te.jsx(
-    Mt,
+    Ft,
     {
       position: (s == null ? void 0 : s.position) || "right",
       size: (s == null ? void 0 : s.size) || 17,
@@ -813,16 +813,16 @@ const It = H.div`
       src: (s == null ? void 0 : s.src) || tt.src,
       alt: "roulette-pointer"
     }
-  ), ft = () => o ? `${Ct} rotation-${oe}` : `rotation-${oe}`;
+  ), mt = () => o ? `${Ut} rotation-${oe}` : `rotation-${oe}`;
   return z ? /* @__PURE__ */ te.jsxs(
-    It,
+    xt,
     {
       style: !at || be > 0 && nt !== be ? { visibility: "hidden" } : {},
       children: [
         /* @__PURE__ */ te.jsx(
-          xt,
+          Mt,
           {
-            className: ft(),
+            className: mt(),
             $classKey: oe,
             $startSpinningTime: we,
             $continueSpinningTime: pe,
@@ -833,16 +833,16 @@ const It = H.div`
             $spinRevolutions: $,
             $easingFunction: q,
             children: /* @__PURE__ */ te.jsx(
-              jt,
+              Ct,
               {
                 width: "900",
                 height: "900",
                 data: ne,
                 outerBorderColor: p,
                 outerBorderWidth: k,
-                innerRadius: G,
+                innerRadius: K,
                 innerBorderColor: M,
-                innerBorderWidth: K,
+                innerBorderWidth: G,
                 radiusLineColor: J,
                 radiusLineWidth: X,
                 fontFamily: E,
@@ -851,31 +851,31 @@ const It = H.div`
                 fontSize: F,
                 perpendicularText: V,
                 prizeMap: R,
-                rouletteUpdater: me,
+                rouletteUpdater: ge,
                 textDistance: Z
               }
             )
           }
         ),
-        ut()
+        ft()
       ]
     }
   ) : null;
 };
 export {
   ze as DEFAULT_BACKGROUND_COLORS,
-  Ot as DEFAULT_FONT_FAMILY,
-  Ge as DEFAULT_FONT_SIZE,
-  Nt as DEFAULT_SPIN_DURATION,
-  Kt as DEFAULT_SPIN_REVOLUTIONS,
+  Nt as DEFAULT_FONT_FAMILY,
+  Ke as DEFAULT_FONT_SIZE,
+  _t as DEFAULT_SPIN_DURATION,
+  Jt as DEFAULT_SPIN_REVOLUTIONS,
   He as DEFAULT_TEXT_COLORS,
-  Yt as Wheel,
-  Xt as calculateSegmentFromRotation,
+  Bt as Wheel,
+  Yt as calculateSegmentFromRotation,
   Ye as clamp,
-  fe as getQuantity,
+  me as getQuantity,
   Xe as getRotationDegrees,
   qe as isCustomFont,
   Be as normalizeAngle,
-  Jt as validateWheelData
+  Xt as validateWheelData
 };
 //# sourceMappingURL=index.esm.js.map
