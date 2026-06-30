@@ -1,4 +1,3 @@
-/// <reference types="react" />
 interface ImagePropsLocal extends ImageProps {
     _imageHTML?: HTMLImageElement;
 }
@@ -19,6 +18,14 @@ export interface StyleType {
 export interface PointerProps {
     src?: string;
     style?: React.CSSProperties;
+    type?: 'image' | 'custom';
+    component?: React.ReactNode;
+    position?: 'top' | 'right' | 'bottom' | 'left';
+    size?: number;
+    offset?: {
+        x: number;
+        y: number;
+    };
 }
 export interface ImageProps {
     uri: string;

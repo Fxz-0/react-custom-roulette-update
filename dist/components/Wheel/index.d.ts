@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import type { JSX } from 'react';
 import { PointerProps, WheelData } from './types';
 interface Props {
     mustStartSpinning: boolean;
@@ -24,6 +24,13 @@ interface Props {
     startingOptionIndex?: number;
     pointerProps?: PointerProps;
     disableInitialAnimation?: boolean;
+    onSpinStart?: () => void;
+    onTick?: (segment: number) => void;
+    onSpinEnd?: (prizeNumber: number) => void;
+    onRemoveWinner?: (prizeNumber: number) => void;
+    removeWinnerOnStop?: boolean;
+    spinRevolutions?: number;
+    easingFunction?: string;
 }
-export declare const Wheel: ({ mustStartSpinning, prizeNumber, data, onStopSpinning, backgroundColors, textColors, outerBorderColor, outerBorderWidth, innerRadius, innerBorderColor, innerBorderWidth, radiusLineColor, radiusLineWidth, fontFamily, fontSize, fontWeight, fontStyle, perpendicularText, textDistance, spinDuration, startingOptionIndex, pointerProps, disableInitialAnimation, }: Props) => JSX.Element | null;
+export declare const Wheel: ({ mustStartSpinning, prizeNumber, data, onStopSpinning, backgroundColors, textColors, outerBorderColor, outerBorderWidth, innerRadius, innerBorderColor, innerBorderWidth, radiusLineColor, radiusLineWidth, fontFamily, fontSize, fontWeight, fontStyle, perpendicularText, textDistance, spinDuration, startingOptionIndex, pointerProps, disableInitialAnimation, onSpinStart, onTick, onSpinEnd, onRemoveWinner, removeWinnerOnStop, spinRevolutions, easingFunction, }: Props) => JSX.Element | null;
 export {};

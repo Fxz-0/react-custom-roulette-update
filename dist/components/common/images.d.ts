@@ -1,1 +1,2 @@
-export const roulettePointer: HTMLImageElement;
+declare const roulettePointer: HTMLImageElement;
+export { roulettePointer };

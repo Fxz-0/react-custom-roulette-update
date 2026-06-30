@@ -1,10 +1,6 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { act } from 'react-dom/test-utils';
-
+import { render, waitFor, act } from '@testing-library/react';
 import { Wheel } from '.';
 
-// test('renders Wheel component', () => {
 const data = [{ option: '0' }];
 const prizeNumber = 0;
 const mustStartSpinning = false;
@@ -24,68 +20,56 @@ const onStopSpinning = () => null;
 
 jest.useFakeTimers();
 
-let container: HTMLDivElement;
-
-beforeEach(() => {
-  container = document.createElement('div');
-  document.body.appendChild(container);
-});
-
-afterEach(() => {
-  document.body.removeChild(container);
-  container = (null as unknown) as HTMLDivElement;
-});
-
 describe('Render Wheel', () => {
   it('required props only', () => {
-    ReactDOM.render(
+    const { container } = render(
       <Wheel
         data={data}
         prizeNumber={prizeNumber}
         mustStartSpinning={mustStartSpinning}
-      />,
-      container
+      />
     );
+    expect(container).toBeTruthy();
   });
 
   it('innerBorderWidth = 0', () => {
-    ReactDOM.render(
+    const { container } = render(
       <Wheel
         data={data}
         prizeNumber={prizeNumber}
         mustStartSpinning={mustStartSpinning}
         innerBorderWidth={0}
-      />,
-      container
+      />
     );
+    expect(container).toBeTruthy();
   });
 
   it('outerBorderWidth = 0', () => {
-    ReactDOM.render(
+    const { container } = render(
       <Wheel
         data={data}
         prizeNumber={prizeNumber}
         mustStartSpinning={mustStartSpinning}
         outerBorderWidth={0}
-      />,
-      container
+      />
     );
+    expect(container).toBeTruthy();
   });
 
   it('radiusLineWidth = 0', () => {
-    ReactDOM.render(
+    const { container } = render(
       <Wheel
         data={data}
         prizeNumber={prizeNumber}
         mustStartSpinning={mustStartSpinning}
         radiusLineWidth={0}
-      />,
-      container
+      />
     );
+    expect(container).toBeTruthy();
   });
 
   it('all props defined', () => {
-    ReactDOM.render(
+    const { container } = render(
       <Wheel
         data={data}
         prizeNumber={prizeNumber}
@@ -103,41 +87,48 @@ describe('Render Wheel', () => {
         perpendicularText
         textDistance={textDistance}
         onStopSpinning={onStopSpinning}
-      />,
-      container
+      />
     );
+    expect(container).toBeTruthy();
   });
 
-  it('render spin', () => {
+  it('render spin', async () => {
+    const { container } = render(
+      <Wheel data={data} prizeNumber={prizeNumber} mustStartSpinning />
+    );
+
     act(() => {
-      ReactDOM.render(
-        <Wheel data={data} prizeNumber={prizeNumber} mustStartSpinning />,
-        container
-      );
       jest.runOnlyPendingTimers();
     });
+
+    await waitFor(() => {
+      expect(container).toBeTruthy();
+    });
   });
 
-  it('render callback trigger', () => {
+  it('render callback trigger', async () => {
     let hasBeenCalled = false;
 
-    act(() => {
-      ReactDOM.render(
-        <Wheel
-          data={data}
-          prizeNumber={prizeNumber}
-          mustStartSpinning
-          onStopSpinning={() => {
-            hasBeenCalled = true;
-            return null;
-          }}
-        />,
-        container
-      );
+    render(
+      <Wheel
+        data={data}
+        prizeNumber={prizeNumber}
+        mustStartSpinning
+        onStopSpinning={() => {
+          hasBeenCalled = true;
+          return null;
+        }}
+      />
+    );
 
-      expect(hasBeenCalled).not.toBe(true);
+    expect(hasBeenCalled).not.toBe(true);
+
+    act(() => {
       jest.runAllTimers();
     });
-    expect(hasBeenCalled).toBe(true);
+
+    await waitFor(() => {
+      expect(hasBeenCalled).toBe(true);
+    });
   });
 });

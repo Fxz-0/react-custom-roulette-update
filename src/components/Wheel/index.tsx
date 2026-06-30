@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
+import type { JSX } from 'react'; 
 import WebFont from 'webfontloader';
 
 import {
@@ -12,6 +13,7 @@ import {
   RotationContainer,
   RouletteContainer,
   RoulettePointerImage,
+  CustomPointerWrapper, // Add
 } from './styles';
 import {
   DEFAULT_BACKGROUND_COLORS,
@@ -59,6 +61,14 @@ interface Props {
   startingOptionIndex?: number;
   pointerProps?: PointerProps;
   disableInitialAnimation?: boolean;
+  // New props
+  onSpinStart?: () => void;
+  onTick?: (segment: number) => void;
+  onSpinEnd?: (prizeNumber: number) => void;
+  onRemoveWinner?: (prizeNumber: number) => void;
+  removeWinnerOnStop?: boolean;
+  spinRevolutions?: number; // Add
+  easingFunction?: string; // Add
 }
 
 const STARTED_SPINNING = 'started-spinning';
@@ -91,7 +101,16 @@ export const Wheel = ({
   startingOptionIndex = -1,
   pointerProps = {},
   disableInitialAnimation = DISABLE_INITIAL_ANIMATION,
+  // New props
+  onSpinStart,
+  onTick,
+  onSpinEnd,
+  onRemoveWinner,
+  removeWinnerOnStop = false,
+  spinRevolutions = 4,
+  easingFunction,
 }: Props): JSX.Element | null => {
+  // States
   const [wheelData, setWheelData] = useState<WheelData[]>([...data]);
   const [prizeMap, setPrizeMap] = useState<number[][]>([[0]]);
   const [startRotationDegrees, setStartRotationDegrees] = useState(0);
@@ -106,6 +125,11 @@ export const Wheel = ({
   const [isFontLoaded, setIsFontLoaded] = useState(false);
   const mustStopSpinning = useRef<boolean>(false);
 
+  // New states for tick func
+  //const [currentSegment, setCurrentSegment] = useState<number>(-1);
+  const [lastTickSegment, setLastTickSegment] = useState<number>(-1);
+  const tickIntervalRef = useRef<NodeJS.Timeout | null>(null);
+
   const classKey = makeClassKey(5);
 
   const normalizedSpinDuration = Math.max(0.01, spinDuration);
@@ -117,6 +141,21 @@ export const Wheel = ({
   const totalSpinningTime =
     startSpinningTime + continueSpinningTime + stopSpinningTime;
 
+  // New callback for calculating segment (now inside the component)
+  const calculateCurrentSegment = useCallback(
+    (rotation: number): number => {
+      const normalizedRotation = ((rotation % 360) + 360) % 360;
+      const totalSegments = getQuantity(prizeMap);
+      if (totalSegments === 0) return -1;
+      
+      const segmentAngle = 360 / totalSegments;
+      const adjustedRotation = (360 - normalizedRotation + 90) % 360;
+      return Math.floor(adjustedRotation / segmentAngle) % totalSegments;
+    },
+    [prizeMap]
+  );
+
+  // New effect for loading data
   useEffect(() => {
     let initialMapNum = 0;
     const auxPrizeMap: number[][] = [];
@@ -183,15 +222,15 @@ export const Wheel = ({
           },
           timeout: 1000,
           fontactive() {
-            setRouletteUpdater(!rouletteUpdater);
+            setRouletteUpdater(prev => !prev);
           },
           active() {
             setIsFontLoaded(true);
-            setRouletteUpdater(!rouletteUpdater);
+            setRouletteUpdater(prev => !prev);
           },
         });
       } catch (err) {
-        console.log('Error loading webfonts:', err);
+        console.error('Error loading webfonts:', err);
       }
     } else {
       setIsFontLoaded(true);
@@ -201,61 +240,143 @@ export const Wheel = ({
     setPrizeMap(auxPrizeMap);
     setStartingOption(startingOptionIndex, auxPrizeMap);
     setIsDataUpdated(true);
-  }, [data, backgroundColors, textColors]);
+  }, [data, backgroundColors, textColors, fontFamily, fontSize, fontWeight, fontStyle, startingOptionIndex]);
 
+  // New effect for monitoring tick
+  useEffect(() => {
+    if (isCurrentlySpinning && onTick) {
+      tickIntervalRef.current = setInterval(() => {
+        const rotationContainer = document.querySelector(
+          `.rotation-${classKey}`
+        ) as HTMLElement;
+        
+        if (rotationContainer) {
+          const style = window.getComputedStyle(rotationContainer);
+          const matrix = style.transform;
+
+          if (matrix && matrix !== 'none') {
+            const values = matrix.split('(')[1].split(')')[0].split(',');
+            const a = parseFloat(values[0]);
+            const b = parseFloat(values[1]);
+            const rotation = Math.atan2(b, a) * (180 / Math.PI);
+
+            const segment = calculateCurrentSegment(rotation);
+            if (segment !== lastTickSegment && segment !== -1) {
+              setLastTickSegment(segment);
+              onTick(segment);
+            }
+          }
+        }
+      }, 50);
+
+      return () => {
+        if (tickIntervalRef.current) {
+          clearInterval(tickIntervalRef.current);
+        }
+      };
+    }
+  }, [isCurrentlySpinning, lastTickSegment, calculateCurrentSegment, onTick, classKey]);
+
+  // Start spinning
   useEffect(() => {
     if (mustStartSpinning && !isCurrentlySpinning) {
       setIsCurrentlySpinning(true);
       startSpinning();
       const selectedPrize =
-        prizeMap[prizeNumber][
+        prizeMap[prizeNumber]?.[
           Math.floor(Math.random() * prizeMap[prizeNumber]?.length)
         ];
-      const finalRotationDegreesCalculated = getRotationDegrees(
-        selectedPrize,
-        getQuantity(prizeMap)
-      );
+      
+      //spinRevolutions
+      const finalRotationDegreesCalculated =
+        getRotationDegrees(selectedPrize, getQuantity(prizeMap)) +
+        360 * spinRevolutions;
+      
       setFinalRotationDegrees(finalRotationDegreesCalculated);
     }
-  }, [mustStartSpinning]);
+  }, [mustStartSpinning, isCurrentlySpinning, prizeMap, prizeNumber, spinRevolutions]);
 
+  // Stop spinning
   useEffect(() => {
     if (hasStoppedSpinning) {
       setIsCurrentlySpinning(false);
       setStartRotationDegrees(finalRotationDegrees);
     }
-  }, [hasStoppedSpinning]);
+  }, [hasStoppedSpinning, finalRotationDegrees]);
 
+  // Start spinning (corrected)
   const startSpinning = () => {
     setHasStartedSpinning(true);
     setHasStoppedSpinning(false);
     mustStopSpinning.current = true;
+    
+    //onSpinStart
+    onSpinStart?.();
+
     setTimeout(() => {
       if (mustStopSpinning.current) {
         mustStopSpinning.current = false;
         setHasStartedSpinning(false);
         setHasStoppedSpinning(true);
+
+        //onSpinEnd
+        onSpinEnd?.(prizeNumber);
+
         onStopSpinning();
+
+        // Remove winner after a delay if removeWinnerOnStop 
+        if (removeWinnerOnStop && onRemoveWinner) {
+          setTimeout(() => {
+            onRemoveWinner(prizeNumber);
+          }, 500);
+        }
       }
     }, totalSpinningTime);
   };
 
   const setStartingOption = (optionIndex: number, optionMap: number[][]) => {
-    if (startingOptionIndex >= 0) {
-      const idx = Math.floor(optionIndex) % optionMap?.length;
+    if (optionIndex >= 0 && optionMap.length > 0) {
+      const idx = Math.floor(optionIndex) % optionMap.length;
       const startingOption =
-        optionMap[idx][Math.floor(optionMap[idx]?.length / 2)];
+        optionMap[idx]?.[Math.floor(optionMap[idx]?.length / 2)];
       setStartRotationDegrees(
         getRotationDegrees(startingOption, getQuantity(optionMap), false)
       );
     }
   };
 
+  // Render pointer based on type
+  const renderPointer = () => {
+    if (pointerProps?.type === 'custom' && pointerProps?.component) {
+      return (
+        <CustomPointerWrapper
+          position={pointerProps.position || 'right'}
+          size={pointerProps.size || 17}
+          offset={pointerProps.offset}
+          style={pointerProps.style}
+        >
+          {pointerProps.component}
+        </CustomPointerWrapper>
+      );
+    }
+
+    return (
+      <RoulettePointerImage
+        position={pointerProps?.position || 'right'}
+        size={pointerProps?.size || 17}
+        offset={pointerProps?.offset}
+        style={pointerProps?.style}
+        src={pointerProps?.src || roulettePointer.src}
+        alt="roulette-pointer"
+      />
+    );
+  };
+
   const getRouletteClass = () => {
     if (hasStartedSpinning) {
-      return STARTED_SPINNING;
+      return `${STARTED_SPINNING} rotation-${classKey}`; // Add classKey
     }
-    return '';
+    return `rotation-${classKey}`; // Add classKey
   };
 
   if (!isDataUpdated) {
@@ -273,14 +394,16 @@ export const Wheel = ({
     >
       <RotationContainer
         className={getRouletteClass()}
-        classKey={classKey}
-        startSpinningTime={startSpinningTime}
-        continueSpinningTime={continueSpinningTime}
-        stopSpinningTime={stopSpinningTime}
-        startRotationDegrees={startRotationDegrees}
-        finalRotationDegrees={finalRotationDegrees}
-        disableInitialAnimation={disableInitialAnimation}
-      >
+        $classKey={classKey}
+        $startSpinningTime={startSpinningTime}
+        $continueSpinningTime={continueSpinningTime}
+        $stopSpinningTime={stopSpinningTime}
+        $startRotationDegrees={startRotationDegrees}
+        $finalRotationDegrees={finalRotationDegrees}
+        $disableInitialAnimation={disableInitialAnimation}
+        $spinRevolutions={spinRevolutions} // Add
+        $easingFunction={easingFunction} // Add
+        >
         <WheelCanvas
           width="900"
           height="900"
@@ -302,11 +425,7 @@ export const Wheel = ({
           textDistance={textDistance}
         />
       </RotationContainer>
-      <RoulettePointerImage
-        style={pointerProps?.style}
-        src={pointerProps?.src || roulettePointer.src}
-        alt="roulette-static"
-      />
+      {renderPointer()}
     </RouletteContainer>
   );
 };
