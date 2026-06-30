@@ -93,7 +93,7 @@
     "prepare": "husky install"
   },
   "jest": {
-    "testPathIgnorePatterns":[
+    "testPathIgnorePatterns": [
       "/node_modules/",
       "/dist/",
       "/example/"
