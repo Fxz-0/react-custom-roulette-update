@@ -1,7 +1,7 @@
 import mt, { useRef as Ae, useMemo as gt, useCallback as Ze, useEffect as ie, useState as w } from "react";
 import ht from "webfontloader";
 import H from "styled-components";
-var ue = { exports: {} }, oe = {};
+var ue = { exports: {} }, ae = {};
 /**
  * @license React
  * react-jsx-runtime.production.js
@@ -13,7 +13,7 @@ var ue = { exports: {} }, oe = {};
  */
 var Ue;
 function dt() {
-  if (Ue) return oe;
+  if (Ue) return ae;
   Ue = 1;
   var t = Symbol.for("react.transitional.element"), r = Symbol.for("react.fragment");
   function n(h, l, u) {
@@ -31,7 +31,7 @@ function dt() {
       props: u
     };
   }
-  return oe.Fragment = r, oe.jsx = n, oe.jsxs = n, oe;
+  return ae.Fragment = r, ae.jsx = n, ae.jsxs = n, ae;
 }
 var se = {};
 /**
@@ -58,9 +58,9 @@ function Rt() {
           return "Profiler";
         case V:
           return "StrictMode";
-        case o:
+        case a:
           return "Suspense";
-        case U:
+        case C:
           return "SuspenseList";
         case y:
           return "Activity";
@@ -76,14 +76,14 @@ function Rt() {
           case Y:
             return (e._context.displayName || "Context") + ".Consumer";
           case s:
-            var a = e.render;
-            return e = e.displayName, e || (e = a.displayName || a.name || "", e = e !== "" ? "ForwardRef(" + e + ")" : "ForwardRef"), e;
-          case $:
-            return a = e.displayName || null, a !== null ? a : t(e.type) || "Memo";
+            var o = e.render;
+            return e = e.displayName, e || (e = o.displayName || o.name || "", e = e !== "" ? "ForwardRef(" + e + ")" : "ForwardRef"), e;
+          case U:
+            return o = e.displayName || null, o !== null ? o : t(e.type) || "Memo";
           case D:
-            a = e._payload, e = e._init;
+            o = e._payload, e = e._init;
             try {
-              return t(e(a));
+              return t(e(o));
             } catch {
             }
         }
@@ -95,15 +95,15 @@ function Rt() {
     function n(e) {
       try {
         r(e);
-        var a = !1;
+        var o = !1;
       } catch {
-        a = !0;
+        o = !0;
       }
-      if (a) {
-        a = console;
-        var c = a.error, f = typeof Symbol == "function" && Symbol.toStringTag && e[Symbol.toStringTag] || e.constructor.name || "Object";
+      if (o) {
+        o = console;
+        var c = o.error, f = typeof Symbol == "function" && Symbol.toStringTag && e[Symbol.toStringTag] || e.constructor.name || "Object";
         return c.call(
-          a,
+          o,
           "The provided key is an unsupported type %s. This value must be coerced to a string before using it here.",
           f
         ), r(e);
@@ -114,14 +114,14 @@ function Rt() {
       if (typeof e == "object" && e !== null && e.$$typeof === D)
         return "<...>";
       try {
-        var a = t(e);
-        return a ? "<" + a + ">" : "<...>";
+        var o = t(e);
+        return o ? "<" + o + ">" : "<...>";
       } catch {
         return "<...>";
       }
     }
     function l() {
-      var e = j.A;
+      var e = $.A;
       return e === null ? null : e.getOwner();
     }
     function u() {
@@ -129,16 +129,16 @@ function Rt() {
     }
     function p(e) {
       if (q.call(e, "key")) {
-        var a = Object.getOwnPropertyDescriptor(e, "key").get;
-        if (a && a.isReactWarning) return !1;
+        var o = Object.getOwnPropertyDescriptor(e, "key").get;
+        if (o && o.isReactWarning) return !1;
       }
       return e.key !== void 0;
     }
-    function k(e, a) {
+    function k(e, o) {
       function c() {
         R || (R = !0, console.error(
           "%s: `key` is not a prop. Trying to access it will result in `undefined` being returned. If you need to access the same value within the child component, you should pass it as a different prop. (https://react.dev/link/special-props)",
-          a
+          o
         ));
       }
       c.isReactWarning = !0, Object.defineProperty(e, "key", {
@@ -152,12 +152,12 @@ function Rt() {
         "Accessing element.ref was removed in React 19. ref is now a regular prop. It will be removed from the JSX Element type in a future release."
       )), e = this.props.ref, e !== void 0 ? e : null;
     }
-    function M(e, a, c, f, O, d) {
+    function M(e, o, c, f, O, d) {
       var g = c.ref;
       return e = {
         $$typeof: F,
         type: e,
-        key: a,
+        key: o,
         props: c,
         _owner: f
       }, (g !== void 0 ? g : null) !== null ? Object.defineProperty(e, "ref", {
@@ -185,8 +185,8 @@ function Rt() {
         value: d
       }), Object.freeze && (Object.freeze(e.props), Object.freeze(e)), e;
     }
-    function K(e, a, c, f, O, d) {
-      var g = a.children;
+    function K(e, o, c, f, O, d) {
+      var g = o.children;
       if (g !== void 0)
         if (f)
           if (ne(g)) {
@@ -198,9 +198,9 @@ function Rt() {
               "React.jsx: Static children should always be an array. You are likely explicitly calling React.jsxs or React.jsxDEV. Use the Babel transform instead."
             );
         else J(g);
-      if (q.call(a, "key")) {
+      if (q.call(o, "key")) {
         g = t(e);
-        var z = Object.keys(a).filter(function(me) {
+        var z = Object.keys(o).filter(function(me) {
           return me !== "key";
         });
         f = 0 < z.length ? "{key: someKey, " + z.join(": ..., ") + ": ...}" : "{key: someKey}", m[g + f] || (z = 0 < z.length ? "{" + z.join(": ..., ") + ": ...}" : "{}", console.error(
@@ -216,11 +216,11 @@ React keys must be passed directly to JSX without using spread:
           g
         ), m[g + f] = !0);
       }
-      if (g = null, c !== void 0 && (n(c), g = "" + c), p(a) && (n(a.key), g = "" + a.key), "key" in a) {
+      if (g = null, c !== void 0 && (n(c), g = "" + c), p(o) && (n(o.key), g = "" + o.key), "key" in o) {
         c = {};
-        for (var re in a)
-          re !== "key" && (c[re] = a[re]);
-      } else c = a;
+        for (var re in o)
+          re !== "key" && (c[re] = o[re]);
+      } else c = o;
       return g && k(
         c,
         typeof e == "function" ? e.displayName || e.name || "Unknown" : e
@@ -239,7 +239,7 @@ React keys must be passed directly to JSX without using spread:
     function X(e) {
       return typeof e == "object" && e !== null && e.$$typeof === F;
     }
-    var E = mt, F = Symbol.for("react.transitional.element"), W = Symbol.for("react.portal"), L = Symbol.for("react.fragment"), V = Symbol.for("react.strict_mode"), Z = Symbol.for("react.profiler"), Y = Symbol.for("react.consumer"), B = Symbol.for("react.context"), s = Symbol.for("react.forward_ref"), o = Symbol.for("react.suspense"), U = Symbol.for("react.suspense_list"), $ = Symbol.for("react.memo"), D = Symbol.for("react.lazy"), y = Symbol.for("react.activity"), I = Symbol.for("react.client.reference"), j = E.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, q = Object.prototype.hasOwnProperty, ne = Array.isArray, x = console.createTask ? console.createTask : function() {
+    var E = mt, F = Symbol.for("react.transitional.element"), W = Symbol.for("react.portal"), L = Symbol.for("react.fragment"), V = Symbol.for("react.strict_mode"), Z = Symbol.for("react.profiler"), Y = Symbol.for("react.consumer"), B = Symbol.for("react.context"), s = Symbol.for("react.forward_ref"), a = Symbol.for("react.suspense"), C = Symbol.for("react.suspense_list"), U = Symbol.for("react.memo"), D = Symbol.for("react.lazy"), y = Symbol.for("react.activity"), I = Symbol.for("react.client.reference"), $ = E.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, q = Object.prototype.hasOwnProperty, ne = Array.isArray, x = console.createTask ? console.createTask : function() {
       return null;
     };
     E = {
@@ -247,28 +247,28 @@ React keys must be passed directly to JSX without using spread:
         return e();
       }
     };
-    var R, v = {}, C = E.react_stack_bottom_frame.bind(
+    var R, v = {}, j = E.react_stack_bottom_frame.bind(
       E,
       u
     )(), P = x(h(u)), m = {};
-    se.Fragment = L, se.jsx = function(e, a, c) {
-      var f = 1e4 > j.recentlyCreatedOwnerStacks++;
+    se.Fragment = L, se.jsx = function(e, o, c) {
+      var f = 1e4 > $.recentlyCreatedOwnerStacks++;
       return K(
         e,
-        a,
+        o,
         c,
         !1,
-        f ? Error("react-stack-top-frame") : C,
+        f ? Error("react-stack-top-frame") : j,
         f ? x(h(e)) : P
       );
-    }, se.jsxs = function(e, a, c) {
-      var f = 1e4 > j.recentlyCreatedOwnerStacks++;
+    }, se.jsxs = function(e, o, c) {
+      var f = 1e4 > $.recentlyCreatedOwnerStacks++;
       return K(
         e,
-        a,
+        o,
         c,
         !0,
-        f ? Error("react-stack-top-frame") : C,
+        f ? Error("react-stack-top-frame") : j,
         f ? x(h(e)) : P
       );
     };
@@ -558,72 +558,72 @@ const It = H.div`
       console.warn("Canvas ref is not available");
       return;
     }
-    const o = s.getContext("2d");
-    if (!o) {
+    const a = s.getContext("2d");
+    if (!a) {
       console.error("Could not get 2D context from canvas");
       return;
     }
-    o.clearRect(0, 0, s.width, s.height), o.strokeStyle = "transparent", o.lineWidth = 0;
-    const U = l * 2, $ = k * 2, D = M * 2;
+    a.clearRect(0, 0, s.width, s.height), a.strokeStyle = "transparent", a.lineWidth = 0;
+    const C = l * 2, U = k * 2, D = M * 2;
     let y = 0;
-    const I = s.width / 2 - 10, j = Ye(0, 100, V), q = I * j / 100, ne = Ye(0, 100, u), x = I * ne / 100, R = s.width / 2, v = s.height / 2;
+    const I = s.width / 2 - 10, $ = Ye(0, 100, V), q = I * $ / 100, ne = Ye(0, 100, u), x = I * ne / 100, R = s.width / 2, v = s.height / 2;
     if (!n || n.length === 0) {
       console.warn("No data provided to draw wheel");
       return;
     }
-    for (let C = 0; C < n.length; C++) {
-      const { optionSize: P, style: m, option: e, image: a } = n[C], c = P && P * (2 * Math.PI) / Y || 2 * Math.PI / Y, f = y + c;
-      o.fillStyle = (m == null ? void 0 : m.backgroundColor) || "#cccccc", o.beginPath(), o.arc(R, v, I, y, f, !1), o.arc(R, v, x, f, y, !0), o.stroke(), o.fill(), o.save(), o.strokeStyle = D <= 0 ? "transparent" : G, o.lineWidth = D, Ve(
-        o,
+    for (let j = 0; j < n.length; j++) {
+      const { optionSize: P, style: m, option: e, image: o } = n[j], c = P && P * (2 * Math.PI) / Y || 2 * Math.PI / Y, f = y + c;
+      a.fillStyle = (m == null ? void 0 : m.backgroundColor) || "#cccccc", a.beginPath(), a.arc(R, v, I, y, f, !1), a.arc(R, v, x, f, y, !0), a.stroke(), a.fill(), a.save(), a.strokeStyle = D <= 0 ? "transparent" : G, a.lineWidth = D, Ve(
+        a,
         R,
         v,
         x,
         I,
         y
-      ), C === n.length - 1 && Ve(
-        o,
+      ), j === n.length - 1 && Ve(
+        a,
         R,
         v,
         x,
         I,
         f
-      ), o.strokeStyle = U <= 0 ? "transparent" : h, o.lineWidth = U, o.beginPath(), o.arc(
+      ), a.strokeStyle = C <= 0 ? "transparent" : h, a.lineWidth = C, a.beginPath(), a.arc(
         R,
         v,
-        I - o.lineWidth / 2,
+        I - a.lineWidth / 2,
         0,
         2 * Math.PI
-      ), o.closePath(), o.stroke(), o.strokeStyle = $ <= 0 ? "transparent" : p, o.lineWidth = $, o.beginPath(), o.arc(
+      ), a.closePath(), a.stroke(), a.strokeStyle = U <= 0 ? "transparent" : p, a.lineWidth = U, a.beginPath(), a.arc(
         R,
         v,
-        x + o.lineWidth / 2 - 1,
+        x + a.lineWidth / 2 - 1,
         0,
         2 * Math.PI
-      ), o.closePath(), o.stroke(), o.translate(
+      ), a.closePath(), a.stroke(), a.translate(
         R + Math.cos(y + c / 2) * q,
         v + Math.sin(y + c / 2) * q
       );
       let O = y + c / 2;
-      if (a && a._imageHTML) {
-        O += a.landscape ? 0 : Math.PI / 2, o.rotate(O);
-        const d = a._imageHTML;
-        d.complete && d.naturalWidth > 0 && o.drawImage(
+      if (o && o._imageHTML) {
+        O += o.landscape ? 0 : Math.PI / 2, a.rotate(O);
+        const d = o._imageHTML;
+        d.complete && d.naturalWidth > 0 && a.drawImage(
           d,
-          (d.width + (a.offsetX || 0)) / -2,
-          -(d.height - (a.landscape ? 0 : 90) + (a.offsetY || 0)) / 2,
+          (d.width + (o.offsetX || 0)) / -2,
+          -(d.height - (o.landscape ? 0 : 90) + (o.offsetY || 0)) / 2,
           d.width,
           d.height
         );
       } else if (e) {
-        O += F ? Math.PI / 2 : 0, o.rotate(O);
+        O += F ? Math.PI / 2 : 0, a.rotate(O);
         const d = e;
-        o.font = `${(m == null ? void 0 : m.fontStyle) || E} ${(m == null ? void 0 : m.fontWeight) || J} ${((m == null ? void 0 : m.fontSize) || X) * 2}px ${(m == null ? void 0 : m.fontFamily) || K}, Helvetica, Arial`, o.fillStyle = (m == null ? void 0 : m.textColor) || "#000000", o.textBaseline = "middle", o.fillText(
+        a.font = `${(m == null ? void 0 : m.fontStyle) || E} ${(m == null ? void 0 : m.fontWeight) || J} ${((m == null ? void 0 : m.fontSize) || X) * 2}px ${(m == null ? void 0 : m.fontFamily) || K}, Helvetica, Arial`, a.fillStyle = (m == null ? void 0 : m.textColor) || "#000000", a.textBaseline = "middle", a.fillText(
           d,
-          -o.measureText(d).width / 2,
+          -a.measureText(d).width / 2,
           0
         );
       }
-      o.restore(), y = f;
+      a.restore(), y = f;
     }
   }, [
     n,
@@ -680,17 +680,17 @@ const It = H.div`
   spinDuration: Y = Nt,
   startingOptionIndex: B = -1,
   pointerProps: s = {},
-  disableInitialAnimation: o = _t,
+  disableInitialAnimation: a = _t,
   // New props
-  onSpinStart: U,
-  onTick: $,
+  onSpinStart: C,
+  onTick: U,
   onSpinEnd: D,
   onRemoveWinner: y,
   removeWinnerOnStop: I = !1,
-  spinRevolutions: j = 4,
+  spinRevolutions: $ = 4,
   easingFunction: q
 }) => {
-  const [ne, x] = w([...n]), [R, v] = w([[0]]), [C, P] = w(0), [m, e] = w(0), [a, c] = w(!1), [f, O] = w(!1), [d, g] = w(!1), [z, re] = w(!1), [me, ge] = w(!1), [nt, rt] = w(0), [be, at] = w(0), [ot, Se] = w(!1), he = Ae(!1), [ye, st] = w(-1), de = Ae(null), ae = kt(5), Re = Math.max(0.01, Y), we = Ut * Re, pe = $t * Re, ve = Pt * Re, it = we + pe + ve, Oe = Ze(
+  const [ne, x] = w([...n]), [R, v] = w([[0]]), [j, P] = w(0), [m, e] = w(0), [o, c] = w(!1), [f, O] = w(!1), [d, g] = w(!1), [z, re] = w(!1), [me, ge] = w(!1), [nt, rt] = w(0), [be, ot] = w(0), [at, Se] = w(!1), he = Ae(!1), [ye, st] = w(-1), de = Ae(null), oe = kt(5), Re = Math.max(0.01, Y), we = Ut * Re, pe = $t * Re, ve = Pt * Re, it = we + pe + ve, Oe = Ze(
     (N) => {
       const T = (N % 360 + 360) % 360, A = fe(R);
       if (A === 0) return -1;
@@ -719,7 +719,7 @@ const It = H.div`
       for (let S = 0; S < (b[i].optionSize || 1); S++)
         T[i][S] = N++;
       if (n[i].image) {
-        at((ce) => ce + 1);
+        ot((ce) => ce + 1);
         const S = new Image();
         S.src = ((xe = n[i].image) == null ? void 0 : xe.uri) || "", S.onload = () => {
           var ce, Me, Fe, We, je, Ce;
@@ -755,33 +755,33 @@ const It = H.div`
       Se(!0);
     x([...b]), v(T), ct(B, T), re(!0);
   }, [n, l, u, E, F, W, L, B]), ie(() => {
-    if (d && $)
+    if (d && U)
       return de.current = setInterval(() => {
         const N = document.querySelector(
-          `.rotation-${ae}`
+          `.rotation-${oe}`
         );
         if (N) {
           const A = window.getComputedStyle(N).transform;
           if (A && A !== "none") {
             const b = A.split("(")[1].split(")")[0].split(","), _ = parseFloat(b[0]), ee = parseFloat(b[1]), le = Math.atan2(ee, _) * (180 / Math.PI), Q = Oe(le);
-            Q !== ye && Q !== -1 && (st(Q), $(Q));
+            Q !== ye && Q !== -1 && (st(Q), U(Q));
           }
         }
       }, 50), () => {
         de.current && clearInterval(de.current);
       };
-  }, [d, ye, Oe, $, ae]), ie(() => {
+  }, [d, ye, Oe, U, oe]), ie(() => {
     var N, T;
     if (t && !d) {
       g(!0), lt();
-      const A = (T = R[r]) == null ? void 0 : T[Math.floor(Math.random() * ((N = R[r]) == null ? void 0 : N.length))], b = Xe(A, fe(R)) + 360 * j;
+      const A = (T = R[r]) == null ? void 0 : T[Math.floor(Math.random() * ((N = R[r]) == null ? void 0 : N.length))], b = Xe(A, fe(R));
       e(b);
     }
-  }, [t, d, R, r, j]), ie(() => {
+  }, [t, d, R, r, $]), ie(() => {
     f && (g(!1), P(m));
   }, [f, m]);
   const lt = () => {
-    c(!0), O(!1), he.current = !0, U == null || U(), setTimeout(() => {
+    c(!0), O(!1), he.current = !0, C == null || C(), setTimeout(() => {
       he.current && (he.current = !1, c(!1), O(!0), D == null || D(r), h(), I && y && setTimeout(() => {
         y(r);
       }, 500));
@@ -813,24 +813,24 @@ const It = H.div`
       src: (s == null ? void 0 : s.src) || tt.src,
       alt: "roulette-pointer"
     }
-  ), ft = () => a ? `${Ct} rotation-${ae}` : `rotation-${ae}`;
+  ), ft = () => o ? `${Ct} rotation-${oe}` : `rotation-${oe}`;
   return z ? /* @__PURE__ */ te.jsxs(
     It,
     {
-      style: !ot || be > 0 && nt !== be ? { visibility: "hidden" } : {},
+      style: !at || be > 0 && nt !== be ? { visibility: "hidden" } : {},
       children: [
         /* @__PURE__ */ te.jsx(
           xt,
           {
             className: ft(),
-            $classKey: ae,
+            $classKey: oe,
             $startSpinningTime: we,
             $continueSpinningTime: pe,
             $stopSpinningTime: ve,
-            $startRotationDegrees: C,
+            $startRotationDegrees: j,
             $finalRotationDegrees: m,
-            $disableInitialAnimation: o,
-            $spinRevolutions: j,
+            $disableInitialAnimation: a,
+            $spinRevolutions: $,
             $easingFunction: q,
             children: /* @__PURE__ */ te.jsx(
               jt,

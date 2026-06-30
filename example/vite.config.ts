@@ -9,8 +9,8 @@ export default defineConfig({
       'react-custom-roulette': resolve(__dirname, '../src/index.tsx'),
     },
   },
-  server: {
-    port: 3000,
-    open: true,
+  optimizeDeps: {
+    include: ['styled-components'],   // ← evita doble instancia
   },
+  server: { port: 3000, open: true },
 });

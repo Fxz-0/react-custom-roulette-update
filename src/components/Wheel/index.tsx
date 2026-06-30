@@ -289,8 +289,7 @@ export const Wheel = ({
       
       //spinRevolutions
       const finalRotationDegreesCalculated =
-        getRotationDegrees(selectedPrize, getQuantity(prizeMap)) +
-        360 * spinRevolutions;
+        getRotationDegrees(selectedPrize, getQuantity(prizeMap));
       
       setFinalRotationDegrees(finalRotationDegreesCalculated);
     }
