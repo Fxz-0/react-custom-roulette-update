@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
-import type { JSX } from 'react'; 
-import WebFont from 'webfontloader';
+import type { JSX } from 'react';
 
 import {
   getQuantity,
@@ -215,7 +214,9 @@ export const Wheel = ({
       }
     }
 
-    if (fontsToFetch?.length > 0) {
+  if (fontsToFetch?.length > 0) {
+    import('webfontloader').then((WebFontModule) => {
+      const WebFont = WebFontModule.default;
       try {
         WebFont.load({
           google: {
@@ -233,15 +234,16 @@ export const Wheel = ({
       } catch (err) {
         console.error('Error loading webfonts:', err);
       }
-    } else {
-      setIsFontLoaded(true);
-    }
+    });
+  } else {
+    setIsFontLoaded(true);
+  }
 
-    setWheelData([...wheelDataAux]);
-    setPrizeMap(auxPrizeMap);
-    setStartingOption(startingOptionIndex, auxPrizeMap);
-    setIsDataUpdated(true);
-  }, [data, backgroundColors, textColors, fontFamily, fontSize, fontWeight, fontStyle, startingOptionIndex]);
+  setWheelData([...wheelDataAux]);
+  setPrizeMap(auxPrizeMap);
+  setStartingOption(startingOptionIndex, auxPrizeMap);
+  setIsDataUpdated(true);
+}, [data, backgroundColors, textColors, fontFamily, fontSize, fontWeight, fontStyle, startingOptionIndex]);
 
   // New effect for monitoring tick
   useEffect(() => {
